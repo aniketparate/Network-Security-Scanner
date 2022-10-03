@@ -136,133 +136,480 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QLabel" name="label">
+      <widget class="QStackedWidget" name="stackedWidget">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>40</y>
-         <width>51</width>
-         <height>16</height>
+         <x>0</x>
+         <y>10</y>
+         <width>561</width>
+         <height>561</height>
         </rect>
        </property>
-       <property name="text">
-        <string>Target IP :</string>
+       <property name="currentIndex">
+        <number>1</number>
        </property>
-      </widget>
-      <widget class="QCheckBox" name="range">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>80</y>
-         <width>70</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Range</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>80</y>
-         <width>16</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>to</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="scan">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>140</y>
-         <width>75</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>SCAN</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="targetIP">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>40</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="rangeStart">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>80</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="rangeEnd">
-       <property name="geometry">
-        <rect>
-         <x>280</x>
-         <y>80</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QScrollArea" name="scrollArea">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>200</y>
-         <width>531</width>
-         <height>361</height>
-        </rect>
-       </property>
-       <property name="widgetResizable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>529</width>
-          <height>359</height>
-         </rect>
-        </property>
-        <widget class="QLabel" name="label_3">
+       <widget class="QWidget" name="PortScanner">
+        <widget class="QFrame" name="frame_4">
+         <property name="geometry">
+          <rect>
+           <x>9</x>
+           <y>19</y>
+           <width>551</width>
+           <height>531</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>551</width>
+            <height>551</height>
+           </rect>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="IndividualScan">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;axca&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <attribute name="title">
+            <string>Individual Scan</string>
+           </attribute>
+           <widget class="QFrame" name="frame_5">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>10</y>
+              <width>541</width>
+              <height>491</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLineEdit" name="ind_targetinput">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>0</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QScrollArea" name="ind_outputSA">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>120</y>
+               <width>521</width>
+               <height>371</height>
+              </rect>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>519</width>
+                <height>369</height>
+               </rect>
+              </property>
+              <widget class="QLabel" name="Outputlabel">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>51</width>
+                 <height>21</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Calibri</family>
+                 <pointsize>10</pointsize>
+                 <underline>true</underline>
+                </font>
+               </property>
+               <property name="text">
+                <string>OUTPUT</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+            <widget class="QLabel" name="Targetlabel">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>0</y>
+               <width>51</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Target IP :</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="ind_portinput">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>30</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="portlabel">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>30</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Port :</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="ind_ScanButton">
+             <property name="geometry">
+              <rect>
+               <x>230</x>
+               <y>70</y>
+               <width>75</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Scan</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="ind_portinput_2">
+             <property name="geometry">
+              <rect>
+               <x>310</x>
+               <y>30</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="tolabel_3">
+             <property name="geometry">
+              <rect>
+               <x>270</x>
+               <y>30</y>
+               <width>21</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>to</string>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="FullScan">
+           <attribute name="title">
+            <string>Full Scan</string>
+           </attribute>
+           <widget class="QFrame" name="frame_6">
+            <property name="geometry">
+             <rect>
+              <x>-1</x>
+              <y>9</y>
+              <width>541</width>
+              <height>501</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLineEdit" name="full_targetinput_1">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>0</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QScrollArea" name="full_outputSA">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>120</y>
+               <width>521</width>
+               <height>371</height>
+              </rect>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>519</width>
+                <height>369</height>
+               </rect>
+              </property>
+              <widget class="QLabel" name="Outputlabel_2">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>51</width>
+                 <height>21</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Calibri</family>
+                 <pointsize>10</pointsize>
+                 <underline>true</underline>
+                </font>
+               </property>
+               <property name="text">
+                <string>OUTPUT</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+            <widget class="QLabel" name="Targetlabel_2">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>0</y>
+               <width>51</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Target IP :</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="full_portinput">
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>30</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="portlabel_2">
+             <property name="geometry">
+              <rect>
+               <x>30</x>
+               <y>30</y>
+               <width>61</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Port :</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="full_ScanButton">
+             <property name="geometry">
+              <rect>
+               <x>230</x>
+               <y>70</y>
+               <width>75</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Scan</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="full_targetinput_2">
+             <property name="geometry">
+              <rect>
+               <x>300</x>
+               <y>0</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="tolabel">
+             <property name="geometry">
+              <rect>
+               <x>270</x>
+               <y>0</y>
+               <width>21</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>to</string>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="full_portinput_2">
+             <property name="geometry">
+              <rect>
+               <x>300</x>
+               <y>30</y>
+               <width>131</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="tolabel_2">
+             <property name="geometry">
+              <rect>
+               <x>270</x>
+               <y>30</y>
+               <width>21</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>21</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>to</string>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="ScheduledScan">
+        <widget class="QFrame" name="frame_7">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>10</y>
-           <width>61</width>
-           <height>16</height>
+           <y>20</y>
+           <width>541</width>
+           <height>531</height>
           </rect>
          </property>
-         <property name="font">
-          <font>
-           <family>Verdana</family>
-           <pointsize>10</pointsize>
-           <underline>true</underline>
-          </font>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="text">
-          <string>OUTPUT</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>521</width>
+            <height>511</height>
+           </rect>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>519</width>
+             <height>509</height>
+            </rect>
+           </property>
+           <widget class="QScrollArea" name="scrollArea_2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>501</width>
+              <height>491</height>
+             </rect>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>499</width>
+               <height>489</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </widget>
         </widget>
        </widget>
       </widget>
