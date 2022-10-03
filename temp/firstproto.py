@@ -10,6 +10,8 @@
 
 from ast import Lambda
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+import subprocess
 
 
 class Ui_MainWindow(object):
@@ -100,7 +102,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 519, 369))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.Outputlabel = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.Outputlabel.setGeometry(QtCore.QRect(10, 10, 51, 21))
+        self.Outputlabel.setGeometry(QtCore.QRect(10, 10, 501, 21))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -150,7 +152,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 519, 369))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.Outputlabel_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
-        self.Outputlabel_2.setGeometry(QtCore.QRect(10, 10, 51, 21))
+        self.Outputlabel_2.setGeometry(QtCore.QRect(10, 10, 501, 21))
         font = QtGui.QFont()
         font.setFamily("Calibri")
         font.setPointSize(10)
@@ -209,6 +211,17 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.ind_ScanButton.clicked.connect(self.indPortScan)
+    def indPortScan(self):
+        if self.ind_targetinput.text()=="":
+            self.Outputlabel.setText("please fill all details")
+        else:
+            targetIp = self.ind_targetinput.text()
+            portInp1 = self.ind_portinput.text()
+            portInp2 = self.ind_portinput_2.text()
+            indPortScanProcess = subprocess.run(['nmap',targetIp],capture_output=True,text=True)
+            print(indPortScanProcess)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

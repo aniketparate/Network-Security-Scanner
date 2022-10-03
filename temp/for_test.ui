@@ -56,9 +56,9 @@
          <widget class="QPushButton" name="portscanner">
           <property name="geometry">
            <rect>
-            <x>30</x>
+            <x>10</x>
             <y>50</y>
-            <width>131</width>
+            <width>181</width>
             <height>41</height>
            </rect>
           </property>
@@ -86,9 +86,9 @@
          <widget class="QPushButton" name="scheduledscan">
           <property name="geometry">
            <rect>
-            <x>30</x>
+            <x>10</x>
             <y>110</y>
-            <width>131</width>
+            <width>181</width>
             <height>41</height>
            </rect>
           </property>
@@ -146,7 +146,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="PortScanner">
         <widget class="QFrame" name="frame_4">
@@ -207,49 +207,6 @@
                <height>20</height>
               </rect>
              </property>
-            </widget>
-            <widget class="QScrollArea" name="ind_outputSA">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>120</y>
-               <width>521</width>
-               <height>371</height>
-              </rect>
-             </property>
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="scrollAreaWidgetContents">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>519</width>
-                <height>369</height>
-               </rect>
-              </property>
-              <widget class="QLabel" name="Outputlabel">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>10</y>
-                 <width>51</width>
-                 <height>21</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Calibri</family>
-                 <pointsize>10</pointsize>
-                 <underline>true</underline>
-                </font>
-               </property>
-               <property name="text">
-                <string>OUTPUT</string>
-               </property>
-              </widget>
-             </widget>
             </widget>
             <widget class="QLabel" name="Targetlabel">
              <property name="geometry">
@@ -339,6 +296,52 @@
              <property name="text">
               <string>to</string>
              </property>
+            </widget>
+            <widget class="QLabel" name="Outputlabel">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>100</y>
+               <width>521</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Calibri</family>
+               <pointsize>10</pointsize>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="text">
+              <string>OUTPUT</string>
+             </property>
+            </widget>
+            <widget class="QFrame" name="frame">
+             <property name="geometry">
+              <rect>
+               <x>9</x>
+               <y>129</y>
+               <width>521</width>
+               <height>351</height>
+              </rect>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QTextEdit" name="indScanOpArea">
+              <property name="geometry">
+               <rect>
+                <x>3</x>
+                <y>6</y>
+                <width>521</width>
+                <height>351</height>
+               </rect>
+              </property>
+             </widget>
             </widget>
            </widget>
           </widget>
