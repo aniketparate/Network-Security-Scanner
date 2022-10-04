@@ -1,0 +1,24 @@
+pyuic5 -x -o pyfilename.py design.ui
+
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+import subprocess
+import asyncio
+        # my functions 
+        self.portscanner.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.PortScanner))
+        self.scheduledscan.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
+        self.ind_ScanButton.clicked.connect(self.indPortScan)
+    
+    def indPortScan(self):
+        if self.ind_targetinput.text()=="":
+            self.Outputlabel.setText("please fill all details")
+        else:
+            targetIp = self.ind_targetinput.text()
+            portInp1 = self.ind_portinput.text()
+            portInp2 = self.ind_portinput_2.text()
+            indPortScanProcess = subprocess.run(['nmap',targetIp],capture_output=True,text=True)
+            indPSProcessRes = indPortScanProcess.stdout
+            self.indScanOpArea.setText(indPSProcessRes)
+            

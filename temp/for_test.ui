@@ -257,16 +257,6 @@
               <string>Scan</string>
              </property>
             </widget>
-            <widget class="QLineEdit" name="ind_portinput_2">
-             <property name="geometry">
-              <rect>
-               <x>310</x>
-               <y>30</y>
-               <width>131</width>
-               <height>20</height>
-              </rect>
-             </property>
-            </widget>
             <widget class="QLabel" name="tolabel_3">
              <property name="geometry">
               <rect>
@@ -342,6 +332,16 @@
                </rect>
               </property>
              </widget>
+            </widget>
+            <widget class="QSpinBox" name="ind_portRange">
+             <property name="geometry">
+              <rect>
+               <x>320</x>
+               <y>30</y>
+               <width>121</width>
+               <height>22</height>
+              </rect>
+             </property>
             </widget>
            </widget>
           </widget>

@@ -9,9 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os
 import subprocess
-import asyncio
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -103,9 +102,6 @@ class Ui_MainWindow(object):
         self.ind_ScanButton = QtWidgets.QPushButton(self.frame_5)
         self.ind_ScanButton.setGeometry(QtCore.QRect(230, 70, 75, 23))
         self.ind_ScanButton.setObjectName("ind_ScanButton")
-        self.ind_portinput_2 = QtWidgets.QLineEdit(self.frame_5)
-        self.ind_portinput_2.setGeometry(QtCore.QRect(310, 30, 131, 20))
-        self.ind_portinput_2.setObjectName("ind_portinput_2")
         self.tolabel_3 = QtWidgets.QLabel(self.frame_5)
         self.tolabel_3.setGeometry(QtCore.QRect(270, 30, 21, 20))
         self.tolabel_3.setMinimumSize(QtCore.QSize(0, 20))
@@ -130,7 +126,9 @@ class Ui_MainWindow(object):
         self.indScanOpArea = QtWidgets.QTextEdit(self.frame)
         self.indScanOpArea.setGeometry(QtCore.QRect(3, 6, 521, 351))
         self.indScanOpArea.setObjectName("indScanOpArea")
-        self.indScanOpArea.setReadOnly(True)
+        self.ind_portRange = QtWidgets.QSpinBox(self.frame_5)
+        self.ind_portRange.setGeometry(QtCore.QRect(320, 30, 121, 22))
+        self.ind_portRange.setObjectName("ind_portRange")
         self.tabWidget.addTab(self.IndividualScan, "")
         self.FullScan = QtWidgets.QWidget()
         self.FullScan.setObjectName("FullScan")
@@ -242,8 +240,6 @@ class Ui_MainWindow(object):
             indPSProcessRes = indPortScanProcess.stdout
             self.indScanOpArea.setText(indPSProcessRes)
 
-            
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -274,5 +270,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
-        
