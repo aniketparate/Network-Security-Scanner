@@ -211,9 +211,9 @@
             <widget class="QLabel" name="Targetlabel">
              <property name="geometry">
               <rect>
-               <x>30</x>
+               <x>10</x>
                <y>0</y>
-               <width>51</width>
+               <width>71</width>
                <height>21</height>
               </rect>
              </property>
@@ -234,9 +234,9 @@
             <widget class="QLabel" name="portlabel">
              <property name="geometry">
               <rect>
-               <x>30</x>
+               <x>10</x>
                <y>30</y>
-               <width>61</width>
+               <width>41</width>
                <height>21</height>
               </rect>
              </property>
@@ -333,13 +333,13 @@
               </property>
              </widget>
             </widget>
-            <widget class="QSpinBox" name="ind_portRange">
+            <widget class="QLineEdit" name="ind_portinput_2">
              <property name="geometry">
               <rect>
                <x>320</x>
                <y>30</y>
-               <width>121</width>
-               <height>22</height>
+               <width>131</width>
+               <height>20</height>
               </rect>
              </property>
             </widget>
