@@ -11,6 +11,8 @@
 import numbers
 import subprocess
 from PyQt5 import QtCore, QtGui, QtWidgets
+import json
+import nmap
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -227,6 +229,7 @@ class Ui_MainWindow(object):
         # my functions 
         self.portscanner.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.PortScanner))
         self.scheduledscan.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
+        self.services.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
         self.ind_ScanButton.clicked.connect(self.indPortScan)
     
     
@@ -238,7 +241,7 @@ class Ui_MainWindow(object):
 
         def indPortscanProcessWOports(target):
             self.Outputlabel.setText("running scan without ports")
-            indPortScanProcess = subprocess.run(['nmap',target],capture_output=True,text=True)
+            indPortScanProcess = subprocess.run(['nmap',"-O","-sV",target],capture_output=True,text=True)
             indPSRes = indPortScanProcess.stdout
             return indPSRes
         def indPortscanProcessWports(target,port1,port2):
