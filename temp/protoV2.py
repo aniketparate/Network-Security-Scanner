@@ -373,7 +373,6 @@ class Ui_MainWindow(object):
         indPortInp1 = int(self.ind_portinput.text())
         indPortInp2 = int(self.ind_portinput_2.text())
         indtargetIp = self.ind_targetinput.text()
-        print(indPortInp1,indPortInp2)
         indTypeScan = self.ind_typeOfPortScan.currentIndex()
         QApplication.processEvents()
 
@@ -402,7 +401,7 @@ class Ui_MainWindow(object):
             if indTypeScan == 0:
                 indRegPortScanOp = regularScan(indtargetIp)
                 displayIndPortOp(indRegPortScanOp)
-                
+
             elif indTypeScan == 1:
                 indPingPortScanOp = pingScan(indtargetIp)
                 displayIndPortOp(indRegPortScanOp)
@@ -416,7 +415,7 @@ class Ui_MainWindow(object):
                 displayIndPortOp(indIntUDPPortScanOp)
 
             elif indTypeScan == 4:
-                indIntTCPPortScanOp = pingScan(indtargetIp,indPortInp1,indPortInp2)
+                indIntTCPPortScanOp = intenseTCPScan(indtargetIp,indPortInp1,indPortInp2)
                 displayIndPortOp(indIntTCPPortScanOp)
 
     def retranslateUi(self, MainWindow):
