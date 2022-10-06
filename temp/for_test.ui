@@ -168,9 +168,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>40</y>
+            <y>20</y>
             <width>551</width>
-            <height>511</height>
+            <height>531</height>
            </rect>
           </property>
           <property name="currentIndex">
@@ -181,7 +181,7 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;axca&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <attribute name="title">
-            <string>Individual Scan</string>
+            <string>Individual Target</string>
            </attribute>
            <widget class="QFrame" name="frame_5">
             <property name="geometry">
@@ -203,7 +203,7 @@
               <rect>
                <x>120</x>
                <y>0</y>
-               <width>331</width>
+               <width>231</width>
                <height>20</height>
               </rect>
              </property>
@@ -354,7 +354,7 @@
               <rect>
                <x>10</x>
                <y>70</y>
-               <width>111</width>
+               <width>101</width>
                <height>21</height>
               </rect>
              </property>
@@ -365,9 +365,9 @@
             <widget class="QComboBox" name="ind_typeOfPortScan">
              <property name="geometry">
               <rect>
-               <x>130</x>
+               <x>120</x>
                <y>70</y>
-               <width>171</width>
+               <width>181</width>
                <height>31</height>
               </rect>
              </property>
@@ -383,12 +383,17 @@
              </item>
              <item>
               <property name="text">
-               <string>Quick Scan</string>
+               <string>Intensive Scan</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>Quic Scan ++</string>
+               <string>Intensive | UDP Scan</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Intensive | TCP Scan</string>
               </property>
              </item>
             </widget>
@@ -396,7 +401,7 @@
           </widget>
           <widget class="QWidget" name="FullScanTab">
            <attribute name="title">
-            <string>Full Scan</string>
+            <string>Full Network </string>
            </attribute>
            <widget class="QFrame" name="frame_6">
             <property name="geometry">
@@ -416,7 +421,7 @@
             <widget class="QLineEdit" name="full_targetinput_1">
              <property name="geometry">
               <rect>
-               <x>110</x>
+               <x>120</x>
                <y>0</y>
                <width>131</width>
                <height>20</height>
@@ -427,9 +432,9 @@
              <property name="geometry">
               <rect>
                <x>10</x>
-               <y>120</y>
+               <y>150</y>
                <width>521</width>
-               <height>371</height>
+               <height>341</height>
               </rect>
              </property>
              <property name="widgetResizable">
@@ -441,7 +446,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>519</width>
-                <height>369</height>
+                <height>339</height>
                </rect>
               </property>
              </widget>
@@ -451,18 +456,18 @@
               <rect>
                <x>10</x>
                <y>0</y>
-               <width>71</width>
+               <width>101</width>
                <height>21</height>
               </rect>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Target :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Range of Ip :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
             <widget class="QLineEdit" name="full_portinput">
              <property name="geometry">
               <rect>
-               <x>110</x>
+               <x>120</x>
                <y>30</y>
                <width>131</width>
                <height>20</height>
@@ -474,31 +479,31 @@
               <rect>
                <x>10</x>
                <y>30</y>
-               <width>81</width>
+               <width>91</width>
                <height>21</height>
               </rect>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Port :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Port Range :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
             <widget class="QPushButton" name="full_ScanButton">
              <property name="geometry">
               <rect>
-               <x>230</x>
+               <x>310</x>
                <y>60</y>
-               <width>75</width>
-               <height>23</height>
+               <width>111</width>
+               <height>31</height>
               </rect>
              </property>
              <property name="text">
-              <string>Scan</string>
+              <string>Full Scan</string>
              </property>
             </widget>
             <widget class="QLineEdit" name="full_targetinput_2">
              <property name="geometry">
               <rect>
-               <x>300</x>
+               <x>290</x>
                <y>0</y>
                <width>131</width>
                <height>20</height>
@@ -508,7 +513,7 @@
             <widget class="QLabel" name="tolabel">
              <property name="geometry">
               <rect>
-               <x>270</x>
+               <x>260</x>
                <y>0</y>
                <width>21</width>
                <height>20</height>
@@ -538,7 +543,7 @@
             <widget class="QLineEdit" name="full_portinput_2">
              <property name="geometry">
               <rect>
-               <x>300</x>
+               <x>290</x>
                <y>30</y>
                <width>131</width>
                <height>20</height>
@@ -548,7 +553,7 @@
             <widget class="QLabel" name="tolabel_2">
              <property name="geometry">
               <rect>
-               <x>270</x>
+               <x>260</x>
                <y>30</y>
                <width>21</width>
                <height>20</height>
@@ -579,7 +584,7 @@
              <property name="geometry">
               <rect>
                <x>20</x>
-               <y>90</y>
+               <y>120</y>
                <width>501</width>
                <height>21</height>
               </rect>
@@ -595,6 +600,54 @@
               <string>OUTPUT</string>
              </property>
             </widget>
+            <widget class="QComboBox" name="full_typeOfPortScan">
+             <property name="geometry">
+              <rect>
+               <x>120</x>
+               <y>60</y>
+               <width>171</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <item>
+              <property name="text">
+               <string>Regular Scan</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ping Scan</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Intensive Scan</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Intensive | UDP Scan</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Intensive | TCP Scan</string>
+              </property>
+             </item>
+            </widget>
+            <widget class="QLabel" name="label_9">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>60</y>
+               <width>101</width>
+               <height>31</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Type of Scan :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
            </widget>
           </widget>
          </widget>
@@ -603,7 +656,7 @@
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>10</y>
+           <y>0</y>
            <width>521</width>
            <height>16</height>
           </rect>
@@ -856,7 +909,7 @@
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Time Interval :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
-           <widget class="QPushButton" name="SingSchScanSchBtn">
+           <widget class="QPushButton" name="SingSchScanBtn">
             <property name="geometry">
              <rect>
               <x>10</x>

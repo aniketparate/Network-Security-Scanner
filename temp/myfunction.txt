@@ -1,17 +1,25 @@
 pyuic5 -x -o pyfilename.py design.ui
 
 
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-import os
 import subprocess
-import asyncio
-import nmap
-         # my functions 
+from PyQt5 import QtCore, QtGui,QtWidgets
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIntValidator
+
+        # my functions 
+
+        self.ind_portinput.setText("1")
+        self.ind_portinput_2.setText("1000")
+        self.indScanOpArea.setReadOnly(True)
+
+
+        self.ind_portinput.setValidator(QIntValidator())
+        self.ind_portinput_2.setValidator(QIntValidator())
         self.portscanner.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.PortScanner))
         self.scheduledscan.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
-        self.services.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
+        self.services.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.Services))
         self.ind_ScanButton.clicked.connect(self.indPortScan)
+        # self.ind_ScanButton.setDisabled(True)
     
     
         
@@ -19,32 +27,35 @@ import nmap
         indPortInp1 = self.ind_portinput.text()
         indPortInp2 = self.ind_portinput_2.text()
         indtargetIp = self.ind_targetinput.text()
+        indTypeScan = self.ind_typeOfPortScan.currentText()
+
+        def waitingText():
+            self.indScanOpArea.setText("...processing")
+
+        def regularScan(target):
+            regScan = subprocess.run(['nmap',"-O","-sV",target],capture_output=True,text=True)
+            indPSRes = regScan.stdout
+            return indPSRes
 
         def indPortscanProcessWOports(target):
             self.Outputlabel.setText("running scan without ports")
             indPortScanProcess = subprocess.run(['nmap',"-O","-sV",target],capture_output=True,text=True)
             indPSRes = indPortScanProcess.stdout
+            QApplication.processEvents()
             return indPSRes
         def indPortscanProcessWports(target,port1,port2):
             self.Outputlabel.setText("running scan with ports")
             indPortScanProcess = subprocess.run(['nmap',port1+"-"+port2,target],capture_output=True,text=True)
             indPSRes = indPortScanProcess.stdout
+            QApplication.processEvents()
             return indPSRes
 
         if indtargetIp=="":
             self.Outputlabel.setText("please fill all details")
-        # elif indtargetIp=="" and indPortInp1!="" or indPortInp2 !="":
-        #     self.Outputlabel.setText("Please specify target")
-        # elif (indPortInp1=="" or indPortInp2=="") and indtargetIp=="":
-        #     self.Outputlabel.setText("Please specify target")
-        # elif indPortInp1 > indPortInp2:
-        #     self.Outputlabel.setText("enter valid range")
         else:
-            # self.indScanOpArea.setText("...processing")
             if indtargetIp!="" and indPortInp1=="" or indPortInp2 == "":
                 indPSProcessRes = indPortscanProcessWOports(indtargetIp)
                 self.indScanOpArea.setText(indPSProcessRes)
             elif indtargetIp!="" and indPortInp1!="" or indPortInp2 != "":
                 indPSProcessRes = indPortscanProcessWports(indtargetIp,indPortInp1,indPortInp2)
                 self.indScanOpArea.setText(indPSProcessRes)
-            
