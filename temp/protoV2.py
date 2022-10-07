@@ -442,11 +442,11 @@ class Ui_MainWindow(object):
         print(serviceList)
         # >> [{'pId': '0', 'pName': 'System Idle Process', 'pStatus': 'running'}, {'pId': '36520', 'pName': 'QcShm.exe', 'pStatus': 'running'}]
         row=0
-        self.tableWidget.setRowCount(len(serviceList))
+        self.listServicesTab.setRowCount(len(serviceList))
         for service in serviceList: 
-            self.tableWidget.setItem(row , 0, QtWidgets.QTableWidgetItem(service["pId"]))
-            self.tableWidget.setItem(row , 1, QtWidgets.QTableWidgetItem(service["pName"]))
-            self.tableWidget.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
+            self.listServicesTab.setItem(row , 0, QtWidgets.QTableWidgetItem(service["pId"]))
+            self.listServicesTab.setItem(row , 1, QtWidgets.QTableWidgetItem(service["pName"]))
+            self.listServicesTab.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
             row=row+1
 
 
