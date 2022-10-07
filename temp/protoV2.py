@@ -10,6 +10,10 @@
 
 import subprocess, psutil
 from unicodedata import name
+import string
+import threading
+from PyQt5 import QtCore, QtGui, QtWidgets
+import subprocess
 from PyQt5 import QtCore, QtGui,QtWidgets
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIntValidator
@@ -375,6 +379,10 @@ class Ui_MainWindow(object):
         indPortInp2 = int(self.ind_portinput_2.text())
         indtargetIp = self.ind_targetinput.text()
         indTypeScan = self.ind_typeOfPortScan.currentIndex()
+
+        t = threading.Thread(target=self.intenseScan)
+
+
         QApplication.processEvents()
 
         def regularScan(target):
