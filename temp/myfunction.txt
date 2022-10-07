@@ -6,10 +6,10 @@ from PyQt5 import QtCore, QtGui,QtWidgets
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIntValidator
 
-        # my functions 
+       # my functions 
 
-        self.ind_portinput.setText("1")
-        self.ind_portinput_2.setText("1000")
+        self.ind_portinput.setText("0")
+        self.ind_portinput_2.setText("65535")
         self.indScanOpArea.setReadOnly(True)
 
 
@@ -21,41 +21,54 @@ from PyQt5.QtGui import QIntValidator
         self.ind_ScanButton.clicked.connect(self.indPortScan)
         # self.ind_ScanButton.setDisabled(True)
     
-    
         
-    def indPortScan(self):
-        indPortInp1 = self.ind_portinput.text()
-        indPortInp2 = self.ind_portinput_2.text()
-        indtargetIp = self.ind_targetinput.text()
-        indTypeScan = self.ind_typeOfPortScan.currentText()
 
-        def waitingText():
-            self.indScanOpArea.setText("...processing")
+
+    def indPortScan(self):
+        indPortInp1 = int(self.ind_portinput.text())
+        indPortInp2 = int(self.ind_portinput_2.text())
+        indtargetIp = self.ind_targetinput.text()
+        indTypeScan = self.ind_typeOfPortScan.currentIndex()
+        QApplication.processEvents()
 
         def regularScan(target):
-            regScan = subprocess.run(['nmap',"-O","-sV",target],capture_output=True,text=True)
-            indPSRes = regScan.stdout
-            return indPSRes
+            regScan = subprocess.run(['nmap',target],capture_output=True,text=True)
+            return regScan.stdout
+        def pingScan(target):
+            regScan = subprocess.run(['nmap','-sn',target],capture_output=True,text=True)
+            return regScan.stdout
+        def intenseScan(target):
+            regScan = subprocess.run(['nmap','-T4','-A','-v',target],capture_output=True,text=True)
+            return regScan.stdout
+        def intenseUDPScan(target,port1,port2):
+            regScan = subprocess.run(['nmap','-p',port1+'-'+port2,'-sS','-sU','-T4',target],capture_output=True,text=True)
+            return regScan.stdout
+        def intenseTCPScan(target,port1,port2):
+            regScan = subprocess.run(['nmap','-p',port1+'-'+port2,target],capture_output=True,text=True)
+            return regScan.stdout
+            
+        def displayIndPortOp(string):
+            self.indScanOpArea.setText(string)
 
-        def indPortscanProcessWOports(target):
-            self.Outputlabel.setText("running scan without ports")
-            indPortScanProcess = subprocess.run(['nmap',"-O","-sV",target],capture_output=True,text=True)
-            indPSRes = indPortScanProcess.stdout
-            QApplication.processEvents()
-            return indPSRes
-        def indPortscanProcessWports(target,port1,port2):
-            self.Outputlabel.setText("running scan with ports")
-            indPortScanProcess = subprocess.run(['nmap',port1+"-"+port2,target],capture_output=True,text=True)
-            indPSRes = indPortScanProcess.stdout
-            QApplication.processEvents()
-            return indPSRes
-
-        if indtargetIp=="":
-            self.Outputlabel.setText("please fill all details")
+        if indtargetIp=="" or indPortInp1=="" or indPortInp2=="":
+            self.indScanOpArea.setText("Enter All Fields")
         else:
-            if indtargetIp!="" and indPortInp1=="" or indPortInp2 == "":
-                indPSProcessRes = indPortscanProcessWOports(indtargetIp)
-                self.indScanOpArea.setText(indPSProcessRes)
-            elif indtargetIp!="" and indPortInp1!="" or indPortInp2 != "":
-                indPSProcessRes = indPortscanProcessWports(indtargetIp,indPortInp1,indPortInp2)
-                self.indScanOpArea.setText(indPSProcessRes)
+            if indTypeScan == 0:
+                indRegPortScanOp = regularScan(indtargetIp)
+                displayIndPortOp(indRegPortScanOp)
+
+            elif indTypeScan == 1:
+                indPingPortScanOp = pingScan(indtargetIp)
+                displayIndPortOp(indRegPortScanOp)
+
+            elif indTypeScan == 2:
+                indIntPortScanOp = intenseScan(indtargetIp)
+                displayIndPortOp(indIntPortScanOp)
+
+            elif indTypeScan == 3:
+                indIntUDPPortScanOp = intenseUDPScan(indtargetIp,indPortInp1,indPortInp2)
+                displayIndPortOp(indIntUDPPortScanOp)
+
+            elif indTypeScan == 4:
+                indIntTCPPortScanOp = intenseTCPScan(indtargetIp,indPortInp1,indPortInp2)
+                displayIndPortOp(indIntTCPPortScanOp)

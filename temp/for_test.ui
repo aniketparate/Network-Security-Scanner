@@ -692,7 +692,7 @@
            </rect>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -750,17 +750,12 @@
              </property>
              <column>
               <property name="text">
+               <string>PID</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
                <string>Application</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Port number</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Protocol</string>
               </property>
              </column>
              <column>
@@ -811,12 +806,7 @@
              </column>
              <column>
               <property name="text">
-               <string>Port Number</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Edit</string>
+               <string>Kill</string>
               </property>
              </column>
             </widget>
