@@ -18,8 +18,6 @@ from PyQt5 import QtCore, QtGui,QtWidgets
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIntValidator
 import nmap
- 
-scanner = nmap.PortScanner()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -348,7 +346,7 @@ class Ui_MainWindow(object):
         self.tabWidget_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # my functions 
+# ----------------- my functions -------------------------- 
 
         self.ind_portinput.setText("0")
         self.ind_portinput_2.setText("65535")
@@ -365,14 +363,15 @@ class Ui_MainWindow(object):
         self.listServicesRefresh.clicked.connect(self.servicesList)
         # self.ind_ScanButton.setDisabled(True)
     
-        
     def fullPortScan(self):
-            fullTargetInp = self.full_targetinput_1.text()
-            subnetMaskLen = self.full_subnetLen.text()
-            print(fullTargetInp+subnetMaskLen)
-            scanner.scan(hosts=fullTargetInp+subnetMaskLen, arguments='-n -sP -PE -PA21,23,80,3389')
-            hosts_list = [{"ip_add":x,"status":scanner[x]['status']['state']} for x in scanner.all_hosts()]
-            print(hosts_list)
+        scanner = nmap.PortScanner()
+        fullTargetInp = self.full_targetinput_1.text()
+        subnetMaskLen = self.full_subnetLen.text()
+        print(fullTargetInp+subnetMaskLen)
+        scanner.scan(hosts=fullTargetInp+subnetMaskLen, arguments='-n -sP -PE -PA21,23,80,3389')
+        hosts_list = [{"ip_add":x,"status":scanner[x]['status']['state']} for x in scanner.all_hosts()]
+        print(hosts_list)
+
 
     def indPortScan(self):
         indPortInp1 = int(self.ind_portinput.text())
@@ -457,6 +456,7 @@ class Ui_MainWindow(object):
             self.listServicesTab.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
             row=row+1
 
+# ----------------- my functions ends -------------------------- 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

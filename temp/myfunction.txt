@@ -1,10 +1,17 @@
 pyuic5 -x -o pyfilename.py design.ui
 
 
+import subprocess, psutil
+from unicodedata import name
+import string
+import threading
+from PyQt5 import QtCore, QtGui, QtWidgets
 import subprocess
 from PyQt5 import QtCore, QtGui,QtWidgets
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIntValidator
+from PyQt5.QtCore import Qt
+import nmap
 
        # my functions 
 
@@ -19,10 +26,18 @@ from PyQt5.QtGui import QIntValidator
         self.scheduledscan.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.ScheduledScan))
         self.services.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.Services))
         self.ind_ScanButton.clicked.connect(self.indPortScan)
+        self.full_ScanButton.clicked.connect(self.fullPortScan)
         self.listServicesRefresh.clicked.connect(self.servicesList)
         # self.ind_ScanButton.setDisabled(True)
     
-        
+    def fullPortScan(self):
+        scanner = nmap.PortScanner()
+        fullTargetInp = self.full_targetinput_1.text()
+        subnetMaskLen = self.full_subnetLen.text()
+        print(fullTargetInp+subnetMaskLen)
+        scanner.scan(hosts=fullTargetInp+subnetMaskLen, arguments='-n -sP -PE -PA21,23,80,3389')
+        hosts_list = [{"ip_add":x,"status":scanner[x]['status']['state']} for x in scanner.all_hosts()]
+        print(hosts_list)
 
 
     def indPortScan(self):
@@ -30,6 +45,10 @@ from PyQt5.QtGui import QIntValidator
         indPortInp2 = int(self.ind_portinput_2.text())
         indtargetIp = self.ind_targetinput.text()
         indTypeScan = self.ind_typeOfPortScan.currentIndex()
+
+        t = threading.Thread(target=self.intenseScan)
+
+
         QApplication.processEvents()
 
         def regularScan(target):
@@ -74,7 +93,8 @@ from PyQt5.QtGui import QIntValidator
                 indIntTCPPortScanOp = intenseTCPScan(indtargetIp,indPortInp1,indPortInp2)
                 displayIndPortOp(indIntTCPPortScanOp)
 
-def servicesList(self):
+        
+    def servicesList(self):
         processIdarr = []
         processNamearr = []
         processStatusarr = []
@@ -96,9 +116,9 @@ def servicesList(self):
         print(serviceList)
         # >> [{'pId': '0', 'pName': 'System Idle Process', 'pStatus': 'running'}, {'pId': '36520', 'pName': 'QcShm.exe', 'pStatus': 'running'}]
         row=0
-        self.tableWidget.setRowCount(len(serviceList))
+        self.listServicesTab.setRowCount(len(serviceList))
         for service in serviceList: 
-            self.tableWidget.setItem(row , 0, QtWidgets.QTableWidgetItem(service["pId"]))
-            self.tableWidget.setItem(row , 1, QtWidgets.QTableWidgetItem(service["pName"]))
-            self.tableWidget.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
+            self.listServicesTab.setItem(row , 0, QtWidgets.QTableWidgetItem(service["pId"]))
+            self.listServicesTab.setItem(row , 1, QtWidgets.QTableWidgetItem(service["pName"]))
+            self.listServicesTab.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
             row=row+1
