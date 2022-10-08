@@ -473,7 +473,6 @@ class Ui_MainWindow(object):
         for process in psutil.process_iter ():
             ProcessId = str(process.pid)
             processIdarr.append(ProcessId)
-            # print(ProcessId)
             Name = process.name()
             processNamearr.append(Name)
             Status = process.status()  
@@ -485,7 +484,7 @@ class Ui_MainWindow(object):
             eachEle = {"pId":processIdarr[i],"pName":processNamearr[i],"pStatus":processStatusarr[i]}
             serviceList.append(eachEle)
             i=i+1
-        print(serviceList)
+        # print(serviceList)
         # >> [{'pId': '0', 'pName': 'System Idle Process', 'pStatus': 'running'}, {'pId': '36520', 'pName': 'QcShm.exe', 'pStatus': 'running'}]
         row=0
         self.listServicesTab.setRowCount(len(serviceList))
@@ -495,7 +494,7 @@ class Ui_MainWindow(object):
             self.listServicesTab.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
             row=row+1
     # def indGetIp():
-          
+
         #--------------------------- my function ends -----------------------------
 
 
@@ -581,3 +580,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    
