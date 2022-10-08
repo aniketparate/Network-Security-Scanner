@@ -2,15 +2,10 @@ pyuic5 -x -o pyfilename.py design.ui
 
 
 import subprocess, psutil
-from unicodedata import name
-import string
-import threading
 from PyQt5 import QtCore, QtGui, QtWidgets
 import subprocess
-from PyQt5 import QtCore, QtGui,QtWidgets
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QAbstractItemView
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtCore import Qt
 import nmap
 
        # my functions 
@@ -28,28 +23,65 @@ import nmap
         self.ind_ScanButton.clicked.connect(self.indPortScan)
         self.full_ScanButton.clicked.connect(self.fullPortScan)
         self.listServicesRefresh.clicked.connect(self.servicesList)
-        # self.ind_ScanButton.setDisabled(True)
-    
+        self.ind_typeOfPortScan.currentIndexChanged.connect(self.changePortVisibility)
+        self.fullScanOpTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.listServicesTab.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+    def changePortVisibility(self):
+        if self.ind_typeOfPortScan.currentIndex()==0:
+            self.ind_portinput.setText("1")
+            self.ind_portinput_2.setText("1024")
+            self.ind_portinput.setDisabled(True)
+            self.ind_portinput_2.setDisabled(True)
+        elif self.ind_typeOfPortScan.currentIndex()==1:
+            self.ind_portinput.setDisabled(True)
+            self.ind_portinput_2.setDisabled(True)
+        elif self.ind_typeOfPortScan.currentIndex()==2:
+            self.ind_portinput.setDisabled(True)
+            self.ind_portinput_2.setDisabled(True)
+        elif self.ind_typeOfPortScan.currentIndex()==3:
+            self.ind_portinput.setText("0")
+            self.ind_portinput_2.setText("65535")
+            self.ind_portinput.setDisabled(False)
+            self.ind_portinput_2.setDisabled(False)
+        elif self.ind_typeOfPortScan.currentIndex()==4:
+            self.ind_portinput.setText("0")
+            self.ind_portinput_2.setText("65535")
+            self.ind_portinput.setDisabled(False)
+            self.ind_portinput_2.setDisabled(False)
+        else :
+            self.ind_portinput.setDisabled(False)
+            self.ind_portinput_2.setDisabled(False)
+            
     def fullPortScan(self):
-        scanner = nmap.PortScanner()
+        nm = nmap.PortScanner()
         fullTargetInp = self.full_targetinput_1.text()
+        # def getPorts(x):
+        #     keys = []
+        #     getPorts = nm.scan(x, '1-5024')
+        #     dictionary = getPorts['scan'][x]['tcp']
+        #     for key in dictionary.items():
+        #         keys.append(key)
+        #     return keys
         subnetMaskLen = self.full_subnetLen.text()
-        print(fullTargetInp+subnetMaskLen)
-        scanner.scan(hosts=fullTargetInp+subnetMaskLen, arguments='-n -sP -PE -PA21,23,80,3389')
-        hosts_list = [{"ip_add":x,"status":scanner[x]['status']['state']} for x in scanner.all_hosts()]
+        nm.scan(hosts=fullTargetInp+"/"+subnetMaskLen, arguments='-sn')
+        hosts_list = [{"ip_addr":x,"status":nm[x]['status']['state']} for x in nm.all_hosts()]
         print(hosts_list)
-
-
+        self.fullScanOpTable.setRowCount(len(hosts_list))
+        row = 0
+        for host in hosts_list:
+            self.fullScanOpTable.setItem(row,0,QtWidgets.QTableWidgetItem(host["ip_addr"]))
+            self.fullScanOpTable.setItem(row,1,QtWidgets.QTableWidgetItem(host["status"]))
+            row = row+1
+    
     def indPortScan(self):
         indPortInp1 = int(self.ind_portinput.text())
         indPortInp2 = int(self.ind_portinput_2.text())
         indtargetIp = self.ind_targetinput.text()
         indTypeScan = self.ind_typeOfPortScan.currentIndex()
 
-        t = threading.Thread(target=self.intenseScan)
-
-
-        QApplication.processEvents()
+        # t = threading.Thread(target=self.intenseScan)
+        # QApplication.processEvents()
 
         def regularScan(target):
             regScan = subprocess.run(['nmap',target],capture_output=True,text=True)
