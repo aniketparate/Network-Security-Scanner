@@ -494,7 +494,8 @@ class Ui_MainWindow(object):
             self.listServicesTab.setItem(row , 1, QtWidgets.QTableWidgetItem(service["pName"]))
             self.listServicesTab.setItem(row , 2, QtWidgets.QTableWidgetItem(service["pStatus"]))
             row=row+1
-
+    # def indGetIp():
+          
         #--------------------------- my function ends -----------------------------
 
 
