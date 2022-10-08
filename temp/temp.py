@@ -1,10 +1,9 @@
-from telnetlib import STATUS
 import nmap
  
 scanner = nmap.PortScanner()
  
-ip_addr = '192.168.0.115'
-
+ip_addr = '127.0.0.1'
+ 
 response = input("""\nPlease enter the type of scan you want to run
                 1)SYN ACK Scan
                 2)UDP Scan
@@ -81,12 +80,10 @@ elif response == '6':
     print("Open Ports: ", scanner[ip_addr]['tcp'].keys())
      
 elif response == '7': 
-    scanner.scan(hosts='192.168.1.103/24', arguments='-n -sP -PE -PA21,23,80,3389')
-    # hosts_list = [(x, scanner[x]['status']['state']) for x in scanner.all_hosts()]
-    hosts_list = [{"ip_add":x,"status":scanner[x]['status']['state']} for x in scanner.all_hosts()]
-    print(hosts_list)
-    # for host,status in hosts_list:
-    #     print('{0}:{1}'.format(host,status)) 
+    scanner.scan(hosts='192.168.1.0/24', arguments='-n -sP -PE -PA21,23,80,3389')
+    hosts_list = [(x, scanner[x]['status']['state']) for x in scanner.all_hosts()]
+    for host, status in hosts_list:
+        print('{0}:{1}'.format(host, status))
      
 else:
     print("Please choose a number from the options above")

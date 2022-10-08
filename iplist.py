@@ -2,7 +2,9 @@
 import subprocess
 import ipcalc
 import socket
+from matplotlib.pyplot import pink
 from netaddr import IPAddress
+import nmap
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -25,12 +27,18 @@ while True:
     if localIpAddress.encode() in line:
         break
 mask = proc.stdout.readline().rstrip().split(b':')[-1].replace(b' ',b'').decode()
+print(mask)
 masklen = IPAddress(mask).netmask_bits()
+print(masklen)
 
 addr = ipcalc.IP(localIpAddress, mask)
 network_with_cidr = str(addr.guess_network())
 bare_network = network_with_cidr.split('/')[0]
 
-IPs = subprocess.run(['nmap','-sn', network_with_cidr],capture_output=True,text=True)
+scanner = nmap.PortScanner()
+scanner.scan(hosts=network_with_cidr,arguments='-sn')
+host_list=[x for x in scanner.all_hosts()]
+print(host_list)
 
-print(IPs)
+
+# print(networkIPAddresses)
