@@ -10,9 +10,9 @@ def done():
 def meeting():
     print("I'm in a meeting...")
 
-schedule.every(3).seconds.do(job)
-schedule.every(1).seconds.do(meeting)
-schedule.every(60).minutes.do(job)
+# schedule.every(3).seconds.do(job)
+# schedule.every(1).seconds.do(meeting)
+schedule.every(5).seconds.do(job)
 
 
 # Task scheduling

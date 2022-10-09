@@ -17,7 +17,7 @@ from PyQt5.QtCore import *
 import nmap
 from netaddr import IPAddress
 import ipcalc
-from threads import indPortScan
+from ThreadController import indPortScan, indScheduleScan
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

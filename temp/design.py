@@ -9,15 +9,34 @@
 
 
 from threading import Thread
+import concurrent.futures
+import threading
 import subprocess
+from time import sleep
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
+# consoleResult = ''
+
+class Worker(QObject):
+    target = ""
+    result = ""
+    
+    def __init__(self, t) -> None:
+        super().__init__()
+        self.target = t
+
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
+    def run(self):
+        regScan = subprocess.run(['nmap','-Pn',self.target],capture_output=True,text=True)
+        print(regScan.stdout)
+        self.result = regScan.stdout
+        self.finished.emit()
 
 class Ui_MainWindow(object):
-    statusChanged = QtCore.pyqtSignal(bool)
-    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -144,33 +163,61 @@ class Ui_MainWindow(object):
         self.tab1_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        # self.ind_ScanButton.clicked.connect(self.thread)
-        self.connect(self.ind_ScanButton, SIGNAL("clicked()"),self.thread)
-
-        # self.out = ""
-
-    def operation(self):
-        target = self.ind_targetinput.text()
-        regScan = subprocess.run(['nmap','-T4',target],capture_output=True,text=True)
-        # self.indScanOpArea.setText(regScan.stdout)
-        print(regScan.stdout)
+        self.ind_ScanButton.clicked.connect(self.runLongTask)    
+        # self.connect(self.ind_ScanButton, SIGNAL("clicked()"),self.thread)
         
+    def runLongTask(self):
+        target = self.ind_targetinput.text()
+        self.thread = QThread()
 
-        # self.out = regScan.stdout
+        self.worker = Worker(target)
+
+        self.worker.moveToThread(self.thread)
+
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+
+        self.thread.start()
+
+        self.thread.finished.connect(
+            lambda: self.indScanOpArea.setText(self.worker.result)
+        )
+
+        # self.worker.progress.connect(self.reportProgress)
+        # self.out = ""
+        # self.consoleLog = "";
+
+    # def operation(self):
+    #     target = self.ind_targetinput.text()
+    #     regScan = subprocess.run(['nmap','-Pn',target],capture_output=True,text=True)
+    #     # indScanOpArea.setText("12123123")
+    #     self.consoleLog = regScan.stdout
+        
+    # def thread(self):            
+    #     t1 = Thread(target=self.operation)
+    #     t1.start()
+
+    #     while t1.is_alive():
+    #         # sleep(1)
+    #         pass
+        
+    #     self.indScanOpArea.setText(self.consoleLog)
     
-        # self.indScanOpArea.setText(regScan.stdout)
-        # self.setText(self.out)
-        # self.indScanOpArea.setText(self.out)
+    # def setOutput(self):
+    #     with concurrent.futures.ThreadPoolExecutor() as executor:
+    #         future = executor.submit(self.operation)
+    #         return_value = future.result()
+    #         self.indScanOpArea.setText(return_value)
 
-    # def setText(self):
+    #   self.out = regScan.stdout
+    #   self.setText(self.out)
+    #   self.indScanOpArea.setText(self.out)
+    #def setText(self):
 
-    def thread(self):            
-        t1 = Thread(target=self.operation)
-        t1.start()
 
-
-    
-        # return regScan.stdout
+    # return regScan.stdout
     
     # def display(self):
     #     indIntPortScanOp = self.operation()
@@ -191,6 +238,47 @@ class Ui_MainWindow(object):
         self.tab1_3.setTabText(self.tab1_3.indexOf(self.individualScanTab), _translate("MainWindow", "Individual Target"))
         self.tab1_3.setTabText(self.tab1_3.indexOf(self.FullScanTab), _translate("MainWindow", "Full Network "))
         self.label_7.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:600;\">Port Scan :</span></p></body></html>"))
+
+
+# class Worker(QtCore.QObject):
+#     logged = QtCore.pyqtSignal(str)
+#     statusChanged = QtCore.pyqtSignal(bool)
+
+#     def start(self):
+#         threading.Timer(0.2, self._execute, daemon=True).start()
+
+#     def _execute(self):
+#         threading.Timer(0.2, self._execute, daemon=True).start()
+
+#         try:
+#             # target = self.ind_targetinput.text()
+#             regScan = subprocess.run(['nmap','-T4',target],capture_output=True,text=True)
+#             print(regScan.stdout)
+#             # self.indScanOpArea.setText(regScan.stdout)
+#             content = regScan.stdout
+#             self.logged.emit(content)
+#         except IOError as e:
+#             self.statusChanged.emit(False)
+#         else:
+#             self.statusChanged.emit(True)
+
+
+# class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+#     def __init__(self, parent=None):
+#         super().__init__(parent)
+#         self.setupUi(self)
+
+#         self.worker = Worker()
+#         self.worker.logged.connect(self.log_1.setText)
+#         self.worker.statusChanged.connect(self.on_status_changed)
+#         self.worker.start()
+
+#     @QtCore.pyqtSlot(bool)
+#     def on_status_changed(self, status):
+#         text = '<html><head/><body><p><span style=" font-size:18pt;">Status: {}</span></p></body></html>'.format(
+#             "On" if status else "Off"
+#         )
+#         self.StatusL_1.setText(text)
 
 
 if __name__ == "__main__":
