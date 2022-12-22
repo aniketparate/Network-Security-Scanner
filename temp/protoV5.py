@@ -538,7 +538,7 @@ class Ui_MainWindow(object):
         processNamearr = []
         processStatusarr = []
         for process in psutil.process_iter ():
-            ProcessId = str(process.pid())
+            ProcessId = str(process.pid)
             processIdarr.append(ProcessId)
             Name = process.name()
             processNamearr.append(Name)
@@ -595,7 +595,6 @@ class Ui_MainWindow(object):
         host_list=[x for x in scanner.all_hosts()]
         print(host_list)
         self.indScanIpDD.addItems(host_list)
-        #--------------------------- my function ends -----------------------------
 
     def servicesEditList(self):
         processIdarr = []
@@ -647,6 +646,7 @@ class Ui_MainWindow(object):
         os.kill(int(pid), signal.SIGTERM)
         print("killed "+service_name)
 
+#--------------------------- my function ends -----------------------------
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
