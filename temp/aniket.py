@@ -33,9 +33,10 @@ def getWeather():
     clock. config(text=current_time)
 
     #weather
-    api="https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&unit=metric&exclude=hourly&appid={abc2c9b028684190075193708e2cc3cf}"
-    json_data = requests.get(api).json()
-
+    api_url="https://api.openweathermap.org/data/3.0/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&exclude=hourly&appid=f271406152bb327d70b996444732eb48"
+    # api="https://api.openweathermap.org/data/2.5/onecall?lat="+str(location.latitude)+"&lon="+str(location.longitude)+"&unit=metric&exclude=hourly&appid=f271406152bb327d70b996444732eb48"
+    json_data = requests.get(api_url).json()
+    print(json_data)
     #current
     temp = json_data['current']['temp']
     humidity = json_data['current']['humidity']
@@ -81,7 +82,6 @@ label5=Label(root,text="Description",font=('Helvetica',11),fg="white",bg= "#2032
 label5.place(x=50,y=200)
 
 ##search box
-
 Search_image=PhotoImage(file="Images\Rounded Rectangle 3.png")
 myimage=Label (image=Search_image, bg="#57adff")
 myimage.place(x=270,y=120)
